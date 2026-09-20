@@ -1,314 +1,441 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard - Event Management</title>
+<meta charset="UTF-8">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-        body {
-            background: #f4f7fb;
-            color: #222;
-        }
+<title>Dashboard</title>
 
-        /* Navigation Bar */
-        nav {
-            background: #2563eb;
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-        }
+<style>
 
-        nav h2 {
-            font-size: 24px;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: bold;
-        }
+body {
+    background: #f4f7fb;
+}
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+nav {
+    background: #2563eb;
+    color: white;
+    padding: 18px 40px;
 
-        /* Main Container */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 40px auto;
-        }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .welcome {
-            margin-bottom: 30px;
-        }
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
 
-        .welcome h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
 
-        .welcome p {
-            color: #666;
-            font-size: 17px;
-        }
+h1 {
+    margin-bottom: 10px;
+}
 
-        /* Dashboard Cards */
-        .dashboard-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            margin-top: 25px;
-        }
+.subtitle {
+    color: #666;
+    margin-bottom: 30px;
+}
 
-        .dashboard-card {
-            background: white;
-            padding: 30px;
-            border-radius: 18px;
-            text-decoration: none;
-            color: #222;
-            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.10);
-            transition: 0.3s;
-            display: block;
-            cursor: pointer;
-        }
 
-        .dashboard-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
+/* Statistics */
 
-        .icon {
-            font-size: 42px;
-            margin-bottom: 15px;
-        }
+.stats {
 
-        .dashboard-card h3 {
-            font-size: 21px;
-            margin-bottom: 12px;
-        }
+    display: grid;
 
-        .number {
-            font-size: 36px;
-            font-weight: bold;
-            color: #2563eb;
-            margin-bottom: 10px;
-        }
+    grid-template-columns:
+        repeat(3, 1fr);
 
-        .view {
-            color: #2563eb;
-            font-weight: bold;
-        }
+    gap: 20px;
 
-        /* Quick Actions */
-        .quick-actions {
-            margin-top: 45px;
-        }
+    margin-bottom: 40px;
+}
 
-        .quick-actions h2 {
-            margin-bottom: 20px;
-        }
+.stat {
 
-        .buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+    background: white;
 
-        .btn {
-            background: #2563eb;
-            color: white;
-            padding: 13px 22px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+    padding: 25px;
 
-        .btn:hover {
-            background: #1d4ed8;
-        }
+    border-radius: 15px;
 
-        .btn.green {
-            background: #16a34a;
-        }
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.1);
 
-        .btn.green:hover {
-            background: #15803d;
-        }
+}
 
-        .btn.orange {
-            background: #ea580c;
-        }
+.stat h3 {
+    color: #555;
+    margin-bottom: 10px;
+}
 
-        .btn.orange:hover {
-            background: #c2410c;
-        }
+.number {
 
-        /* Mobile */
-        @media (max-width: 800px) {
-            .dashboard-cards {
-                grid-template-columns: 1fr;
-            }
+    font-size: 36px;
 
-            nav {
-                padding: 15px 20px;
-                flex-direction: column;
-                gap: 12px;
-            }
+    font-weight: bold;
 
-            nav a {
-                margin-left: 10px;
-                margin-right: 10px;
-            }
+    color: #2563eb;
 
-            .container {
-                width: 92%;
-            }
-        }
-    </style>
+}
+
+
+/* Registration */
+
+.registration {
+
+    background: white;
+
+    padding: 20px;
+
+    margin-bottom: 15px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.08);
+
+}
+
+.registration h3 {
+
+    color: #2563eb;
+
+    margin-bottom: 12px;
+
+}
+
+.registration p {
+
+    margin: 7px 0;
+
+    color: #444;
+
+}
+
+.event {
+
+    display: inline-block;
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+
+    padding: 7px 10px;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+
+}
+
+.cancel {
+
+    margin-top: 12px;
+
+    padding: 9px 15px;
+
+    background: #dc2626;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+}
+
+.no-data {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    color: #666;
+
+}
+
+
+/* Mobile */
+
+@media(max-width:800px) {
+
+    .stats {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    nav {
+
+        flex-direction: column;
+
+        gap: 15px;
+
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-    <!-- Navigation -->
-    <nav>
-        <h2>🎉 Event Management</h2>
 
-        <div>
-            <a href="index.html">Home</a>
-            <a href="events.html">Events</a>
-            <a href="dashboard.html">Dashboard</a>
-        </div>
-    </nav>
+<nav>
 
+<h2>🎉 Event Management</h2>
 
-    <!-- Main Dashboard -->
-    <div class="container">
+<div>
 
-        <div class="welcome">
-            <h1>📊 Dashboard</h1>
-            <p>Manage your events and registrations easily.</p>
-        </div>
+<a href="index.html">Home</a>
+
+<a href="events.html">Events</a>
+
+<a href="dashboard.html">Dashboard</a>
+
+</div>
+
+</nav>
 
 
-        <!-- Dashboard Cards -->
-        <div class="dashboard-cards">
+<div class="container">
 
-            <!-- Upcoming Events -->
-            <a href="events.html" class="dashboard-card">
+<h1>📊 Dashboard</h1>
 
-                <div class="icon">📅</div>
-
-                <h3>Upcoming Events</h3>
-
-                <div class="number" id="upcomingCount">
-                    0
-                </div>
-
-                <div class="view">
-                    View Upcoming Events →
-                </div>
-
-            </a>
+<p class="subtitle">
+Event registration details
+</p>
 
 
-            <!-- Total Registrations -->
-            <a href="registrations.html" class="dashboard-card">
+<!-- Statistics -->
 
-                <div class="icon">📝</div>
+<div class="stats">
 
-                <h3>Total Registrations</h3>
+<div class="stat">
 
-                <div class="number" id="registrationCount">
-                    0
-                </div>
+<h3>📅 Upcoming Events</h3>
 
-                <div class="view">
-                    View Registrations →
-                </div>
+<div class="number">
+6
+</div>
 
-            </a>
+</div>
 
 
-            <!-- Past Events -->
-            <a href="past-events.html" class="dashboard-card">
+<div class="stat">
 
-                <div class="icon">📚</div>
+<h3>📝 Total Registrations</h3>
 
-                <h3>Past Events</h3>
+<div class="number"
+id="total">
+0
+</div>
 
-                <div class="number" id="pastCount">
-                    0
-                </div>
-
-                <div class="view">
-                    View Past Events →
-                </div>
-
-            </a>
-
-        </div>
+</div>
 
 
-        <!-- Quick Actions -->
-        <div class="quick-actions">
+<div class="stat">
 
-            <h2>Quick Actions</h2>
+<h3>👥 Registered Students</h3>
 
-            <div class="buttons">
+<div class="number"
+id="students">
+0
+</div>
 
-                <a href="events.html" class="btn">
-                    📅 Explore Events
-                </a>
+</div>
 
-                <a href="create-event.html" class="btn green">
-                    ➕ Create Event
-                </a>
+</div>
 
-                <a href="registrations.html" class="btn orange">
-                    📝 My Registrations
-                </a>
 
-                <a href="index.html" class="btn">
-                    🏠 Back to Home
-                </a>
+<h2>📝 Registration List</h2>
+
+<br>
+
+<div id="registrationList"></div>
+
+</div>
+
+
+<script>
+
+
+function displayRegistrations() {
+
+
+    // Read SAME key used by register.html
+
+    let registrations =
+        JSON.parse(
+            localStorage.getItem("registrations")
+        ) || [];
+
+
+    // Show total
+
+    document.getElementById("total")
+        .textContent =
+        registrations.length;
+
+
+    // Show student count
+
+    document.getElementById("students")
+        .textContent =
+        registrations.length;
+
+
+    let list =
+        document.getElementById(
+            "registrationList"
+        );
+
+
+    // If nothing registered
+
+    if (registrations.length === 0) {
+
+        list.innerHTML = `
+
+            <div class="no-data">
+
+                No registrations found.
+
+                <br><br>
+
+                Go to
+                <b>Events</b>
+                and register for an event.
 
             </div>
 
-        </div>
+        `;
 
-    </div>
+        return;
+    }
 
 
-    <!-- JavaScript -->
-    <script>
+    list.innerHTML = "";
 
-        /*
-         * Dashboard counts
-         * These values are examples.
-         * You can later connect them with your events/registration data.
-         */
 
-        document.getElementById("upcomingCount").textContent = "5";
+    // Display every person
 
-        document.getElementById("registrationCount").textContent = "12";
+    registrations.forEach(
+        function(registration, index) {
 
-        document.getElementById("pastCount").textContent = "3";
 
-    </script>
+            list.innerHTML += `
+
+                <div class="registration">
+
+                    <div class="event">
+                        🎓 ${registration.event}
+                    </div>
+
+                    <h3>
+                        👤 ${registration.name}
+                    </h3>
+
+                    <p>
+                        📱 Phone:
+                        ${registration.phone}
+                    </p>
+
+                    <p>
+                        📧 Email:
+                        ${registration.email}
+                    </p>
+
+                    <p>
+                        📅 Registered:
+                        ${registration.registeredDate}
+                    </p>
+
+                    <button
+                        class="cancel"
+                        onclick="cancelRegistration(${index})">
+
+                        Cancel Registration
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+// Cancel registration
+
+function cancelRegistration(index) {
+
+
+    let registrations =
+        JSON.parse(
+            localStorage.getItem("registrations")
+        ) || [];
+
+
+    if (
+        confirm(
+            "Cancel this registration?"
+        )
+    ) {
+
+        registrations.splice(index, 1);
+
+
+        localStorage.setItem(
+            "registrations",
+            JSON.stringify(registrations)
+        );
+
+
+        displayRegistrations();
+
+    }
+
+}
+
+
+// Load registrations
+
+displayRegistrations();
+
+</script>
 
 </body>
+
 </html>
