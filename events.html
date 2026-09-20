@@ -1,209 +1,554 @@
-    <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Events - EventHub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Events - Event Management System</title>
 
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
+            padding: 0;
         }
 
-        nav {
-            background: #0757a8;
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e3a5f, #2563eb);
             color: white;
-            padding: 18px 40px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 18px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         nav h2 {
-            margin: 0;
+            color: #60a5fa;
         }
 
         nav a {
             color: white;
             text-decoration: none;
             margin-left: 25px;
-            font-weight: bold;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            color: #60a5fa;
         }
 
-        .hero {
-            background: linear-gradient(135deg, #0785e8, #0757a8);
-            color: white;
+        /* Page heading */
+        .heading {
             text-align: center;
-            padding: 55px 20px;
+            padding: 50px 20px 30px;
         }
 
-        .hero h1 {
+        .heading h1 {
             font-size: 40px;
-            margin: 0 0 10px;
+            margin-bottom: 10px;
         }
 
-        .hero p {
-            font-size: 18px;
+        .heading p {
+            color: #dbeafe;
         }
 
-        .section {
-            max-width: 1100px;
-            margin: auto;
-            padding: 45px 25px;
-        }
-
-        .section h2 {
-            text-align: center;
-            color: #0757a8;
-            margin-bottom: 30px;
-        }
-
+        /* Event list */
         .event-container {
+            width: 85%;
+            margin: auto;
+            padding-bottom: 50px;
+
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
 
+        /* Event card */
         .event-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
             padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
             transition: 0.3s;
         }
 
         .event-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+            transform: translateY(-6px);
         }
 
-        .event-card h3 {
-            color: #0757a8;
-            font-size: 22px;
+        .event-card .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .event-card h2 {
+            margin-bottom: 12px;
         }
 
         .event-card p {
-            line-height: 1.6;
+            margin: 8px 0;
+            color: #dbeafe;
+            line-height: 1.5;
         }
 
-        .register {
-            background: #0757a8;
-            color: white;
+        /* Register button */
+        .register-btn {
+            width: 100%;
+            margin-top: 18px;
+            padding: 12px;
+
             border: none;
-            padding: 11px 20px;
-            border-radius: 6px;
+            border-radius: 8px;
+
+            background: #2563eb;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
             cursor: pointer;
         }
 
-        .register:hover {
-            background: #043d78;
+        .register-btn:hover {
+            background: #1d4ed8;
         }
 
-        .past {
-            opacity: 0.8;
+        /* Registration section */
+        #registration {
+            display: none;
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto 50px;
+
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+
+            padding: 30px;
+            border-radius: 15px;
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        #registration h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #16a34a;
+            color: white;
+
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #15803d;
+        }
+
+        /* Success message */
+        #success {
+            display: none;
+
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto 50px;
+
+            padding: 20px;
+
+            background: #166534;
+            border-radius: 10px;
+
+            text-align: center;
         }
 
         footer {
-            background: #0757a8;
-            color: white;
+            background: rgba(15, 23, 42, 0.95);
             text-align: center;
-            padding: 25px;
-            margin-top: 30px;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .heading h1 {
+                font-size: 30px;
+            }
         }
     </style>
 </head>
 
+
 <body>
 
-<nav>
-    <h2>EventHub</h2>
+    <!-- Navigation -->
+    <nav>
 
-    <div>
-        <a href="index.html">Home</a>
-        <a href="events.html">Events</a>
-        <a href="create-event.html">Create Event</a>
-        <a href="dashboard.html">Dashboard</a>
-    </div>
-</nav>
+        <h2>EventHub</h2>
 
-<section class="hero">
-    <h1>Explore Events</h1>
-    <p>Discover upcoming events and revisit our past events</p>
-</section>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="events.html">Events</a>
+        </div>
 
-<section class="section">
+    </nav>
 
-    <h2>📅 Upcoming Events</h2>
 
-    <div class="event-container">
+    <!-- Heading -->
+    <section class="heading">
 
+        <h1>🎉 Upcoming Events</h1>
+
+        <p>Choose an event and register now.</p>
+
+    </section>
+
+
+    <!-- Event List -->
+    <section class="event-container">
+
+
+        <!-- Technical Workshop -->
         <div class="event-card">
-            <h3>💻 Technical Workshop</h3>
-            <p><b>📅 Date:</b> 25 September 2026</p>
-            <p><b>📍 Location:</b> College Seminar Hall</p>
-            <p>Learn about modern technology, programming and emerging trends.</p>
-            <button class="register">Register</button>
+
+            <div class="icon">💻</div>
+
+            <h2>Technical Workshop</h2>
+
+            <p>
+                Learn new technologies, programming skills
+                and technical concepts.
+            </p>
+
+            <p>📅 25 September 2026</p>
+
+            <p>📍 Computer Lab</p>
+
+            <button
+                type="button"
+                class="register-btn"
+                onclick="registerEvent('Technical Workshop')">
+
+                Register
+
+            </button>
+
         </div>
 
+
+        <!-- Cultural Fest -->
         <div class="event-card">
-            <h3>🎭 Cultural Fest</h3>
-            <p><b>📅 Date:</b> 30 September 2026</p>
-            <p><b>📍 Location:</b> College Auditorium</p>
-            <p>Enjoy cultural performances, music, dance and student activities.</p>
-            <button class="register">Register</button>
+
+            <div class="icon">🎭</div>
+
+            <h2>Cultural Fest</h2>
+
+            <p>
+                Enjoy music, dance, art and different
+                cultural activities.
+            </p>
+
+            <p>📅 28 September 2026</p>
+
+            <p>📍 College Auditorium</p>
+
+            <button
+                type="button"
+                class="register-btn"
+                onclick="registerEvent('Cultural Fest')">
+
+                Register
+
+            </button>
+
         </div>
 
+
+        <!-- Sports Meet -->
         <div class="event-card">
-            <h3>🏆 Sports Day</h3>
-            <p><b>📅 Date:</b> 5 October 2026</p>
-            <p><b>📍 Location:</b> College Ground</p>
-            <p>Participate in exciting sports competitions and activities.</p>
-            <button class="register">Register</button>
+
+            <div class="icon">🏆</div>
+
+            <h2>Sports Meet</h2>
+
+            <p>
+                Participate in exciting indoor and
+                outdoor sports activities.
+            </p>
+
+            <p>📅 30 September 2026</p>
+
+            <p>📍 College Ground</p>
+
+            <button
+                type="button"
+                class="register-btn"
+                onclick="registerEvent('Sports Meet')">
+
+                Register
+
+            </button>
+
         </div>
+
+
+        <!-- Coding Competition -->
+        <div class="event-card">
+
+            <div class="icon">👨‍💻</div>
+
+            <h2>Coding Competition</h2>
+
+            <p>
+                Test your programming and
+                problem-solving skills.
+            </p>
+
+            <p>📅 2 October 2026</p>
+
+            <p>📍 CSE Lab</p>
+
+            <button
+                type="button"
+                class="register-btn"
+                onclick="registerEvent('Coding Competition')">
+
+                Register
+
+            </button>
+
+        </div>
+
+
+        <!-- Innovation Workshop -->
+        <div class="event-card">
+
+            <div class="icon">🚀</div>
+
+            <h2>Innovation Workshop</h2>
+
+            <p>
+                Explore innovation, creative ideas
+                and new technologies.
+            </p>
+
+            <p>📅 5 October 2026</p>
+
+            <p>📍 Seminar Hall</p>
+
+            <button
+                type="button"
+                class="register-btn"
+                onclick="registerEvent('Innovation Workshop')">
+
+                Register
+
+            </button>
+
+        </div>
+
+
+        <!-- Hackathon -->
+        <div class="event-card">
+
+            <div class="icon">💡</div>
+
+            <h2>Hackathon</h2>
+
+            <p>
+                Build creative solutions and
+                compete with other teams.
+            </p>
+
+            <p>📅 8 October 2026</p>
+
+            <p>📍 Innovation Lab</p>
+
+            <button
+                type="button"
+                class="register-btn"
+                onclick="registerEvent('Hackathon')">
+
+                Register
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- Registration Form -->
+    <section id="registration">
+
+        <h2>📝 Event Registration</h2>
+
+        <form onsubmit="submitRegistration(event)">
+
+            <label>Selected Event</label>
+
+            <input
+                type="text"
+                id="selectedEvent"
+                readonly
+            >
+
+
+            <label>Full Name</label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+                required
+            >
+
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+
+            <label>Phone Number</label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter 10 digit phone number"
+                pattern="[0-9]{10}"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="submit-btn">
+
+                Submit Registration
+
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- Success message -->
+    <div id="success">
+
+        <h3>✅ Registration Successful!</h3>
+
+        <br>
+
+        <p id="successText"></p>
 
     </div>
 
-</section>
 
-<section class="section">
+    <!-- Footer -->
+    <footer>
 
-    <h2>🕘 Past Events</h2>
+        <p>
+            © 2026 EventHub | Event Management System
+        </p>
 
-    <div class="event-container">
+    </footer>
 
-        <div class="event-card past">
-            <h3>🎓 Freshers Day</h3>
-            <p><b>📅 Date:</b> 10 August 2026</p>
-            <p><b>📍 Location:</b> College Auditorium</p>
-            <p>A welcome celebration for new students.</p>
-        </div>
 
-        <div class="event-card past">
-            <h3>🇮🇳 Independence Day</h3>
-            <p><b>📅 Date:</b> 15 August 2026</p>
-            <p><b>📍 Location:</b> College Campus</p>
-            <p>A special celebration with students and staff.</p>
-        </div>
+    <!-- JavaScript -->
+    <script>
 
-        <div class="event-card past">
-            <h3>🧑‍💻 Coding Contest</h3>
-            <p><b>📅 Date:</b> 20 August 2026</p>
-            <p><b>📍 Location:</b> Computer Lab</p>
-            <p>Students participated in a programming challenge.</p>
-        </div>
+        function registerEvent(eventName) {
 
-    </div>
+            document.getElementById("selectedEvent").value =
+                eventName;
 
-</section>
+            document.getElementById("registration").style.display =
+                "block";
 
-<footer>
-    <p>© 2026 EventHub | Event Management System</p>
-    <p>Plan • Register • Participate</p>
-</footer>
+            document.getElementById("success").style.display =
+                "none";
+
+            document.getElementById("registration").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+
+        function submitRegistration(event) {
+
+            event.preventDefault();
+
+            let name =
+                document.getElementById("name").value;
+
+            let selectedEvent =
+                document.getElementById("selectedEvent").value;
+
+            document.getElementById("successText").innerHTML =
+                "Thank you, <b>" +
+                name +
+                "</b>!<br><br>" +
+                "You have successfully registered for <b>" +
+                selectedEvent +
+                "</b>.";
+
+            document.getElementById("registration").style.display =
+                "none";
+
+            document.getElementById("success").style.display =
+                "block";
+
+            document.getElementById("success").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+    </script>
 
 </body>
+
 </html>
