@@ -1,532 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event List</title>
 
-    <title>Events - Event Management</title>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+body {
+    background: #f4f7fb;
+}
 
-        body {
-            background: #f4f7fb;
-            color: #222;
-        }
+nav {
+    background: #2563eb;
+    color: white;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+}
 
-        /* Navigation */
-        nav {
-            background: #2563eb;
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-        }
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
 
-        nav h2 {
-            font-size: 24px;
-        }
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: bold;
-        }
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+.events {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
 
-        /* Page */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 40px auto;
-        }
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+}
 
-        .heading {
-            text-align: center;
-            margin-bottom: 35px;
-        }
+.card h2 {
+    color: #2563eb;
+    margin-bottom: 12px;
+}
 
-        .heading h1 {
-            font-size: 34px;
-            margin-bottom: 10px;
-        }
+.card p {
+    margin: 8px 0;
+    color: #555;
+}
 
-        .heading p {
-            color: #666;
-            font-size: 17px;
-        }
+button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-        /* Event Grid */
-        .event-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
+button:hover {
+    background: #1d4ed8;
+}
 
-        /* Event Card */
-        .event-card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.10);
-            transition: 0.3s;
-        }
-
-        .event-card:hover {
-            transform: translateY(-6px);
-        }
-
-        .event-icon {
-            font-size: 45px;
-            margin-bottom: 15px;
-        }
-
-        .event-card h2 {
-            color: #2563eb;
-            margin-bottom: 12px;
-        }
-
-        .event-card p {
-            color: #555;
-            margin: 8px 0;
-            line-height: 1.5;
-        }
-
-        .event-date {
-            font-weight: bold;
-            color: #111;
-        }
-
-        .register-btn {
-            width: 100%;
-            margin-top: 18px;
-            padding: 13px;
-            border: none;
-            border-radius: 8px;
-            background: #2563eb;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .register-btn:hover {
-            background: #1d4ed8;
-        }
-
-        .register-btn.registered {
-            background: #16a34a;
-        }
-
-        /* Dashboard Button */
-        .dashboard-button {
-            display: block;
-            width: fit-content;
-            margin: 40px auto;
-            padding: 13px 25px;
-            background: #16a34a;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        .dashboard-button:hover {
-            background: #15803d;
-        }
-
-        /* Mobile */
-        @media (max-width: 850px) {
-            .event-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 550px) {
-
-            nav {
-                flex-direction: column;
-                gap: 12px;
-                padding: 15px 20px;
-            }
-
-            nav a {
-                margin: 0 8px;
-            }
-
-            .event-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                width: 92%;
-            }
-        }
-    </style>
+@media(max-width:800px) {
+    .events {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- Navigation -->
-    <nav>
-
-        <h2>🎉 Event Management</h2>
-
-        <div>
-            <a href="index.html">Home</a>
-            <a href="events.html">Events</a>
-            <a href="dashboard.html">Dashboard</a>
-        </div>
-
-    </nav>
-
-
-    <!-- Main Content -->
-    <div class="container">
-
-        <div class="heading">
-
-            <h1>🎓 Available Events</h1>
-
-            <p>
-                Explore events and register for your favourite programs.
-            </p>
-
-        </div>
-
-
-        <!-- Events -->
-        <div class="event-grid">
-
-
-            <!-- Technical Workshop -->
-            <div class="event-card">
-
-                <div class="event-icon">💻</div>
-
-                <h2>Technical Workshop</h2>
-
-                <p>
-                    Learn new technical skills and practical concepts
-                    from experts.
-                </p>
-
-                <p class="event-date">
-                    📅 25 September 2026
-                </p>
-
-                <p>
-                    📍 Computer Science Lab
-                </p>
-
-                <button
-                    class="register-btn"
-                    onclick="registerEvent('Technical Workshop')"
-                    id="Technical-Workshop">
-                    Register
-                </button>
-
-            </div>
-
-
-            <!-- Cultural Fest -->
-            <div class="event-card">
-
-                <div class="event-icon">🎭</div>
-
-                <h2>Cultural Fest</h2>
-
-                <p>
-                    Enjoy music, dance, drama and other cultural
-                    performances.
-                </p>
-
-                <p class="event-date">
-                    📅 28 September 2026
-                </p>
-
-                <p>
-                    📍 College Auditorium
-                </p>
-
-                <button
-                    class="register-btn"
-                    onclick="registerEvent('Cultural Fest')"
-                    id="Cultural-Fest">
-                    Register
-                </button>
-
-            </div>
-
-
-            <!-- Sports Day -->
-            <div class="event-card">
-
-                <div class="event-icon">🏆</div>
-
-                <h2>Sports Day</h2>
-
-                <p>
-                    Participate in different indoor and outdoor
-                    sports activities.
-                </p>
-
-                <p class="event-date">
-                    📅 30 September 2026
-                </p>
-
-                <p>
-                    📍 College Ground
-                </p>
-
-                <button
-                    class="register-btn"
-                    onclick="registerEvent('Sports Day')"
-                    id="Sports-Day">
-                    Register
-                </button>
-
-            </div>
-
-
-            <!-- Coding Competition -->
-            <div class="event-card">
-
-                <div class="event-icon">👨‍💻</div>
-
-                <h2>Coding Competition</h2>
-
-                <p>
-                    Test your programming skills and solve
-                    interesting coding problems.
-                </p>
-
-                <p class="event-date">
-                    📅 2 October 2026
-                </p>
-
-                <p>
-                    📍 Computer Lab
-                </p>
-
-                <button
-                    class="register-btn"
-                    onclick="registerEvent('Coding Competition')"
-                    id="Coding-Competition">
-                    Register
-                </button>
-
-            </div>
-
-
-            <!-- Project Exhibition -->
-            <div class="event-card">
-
-                <div class="event-icon">🚀</div>
-
-                <h2>Project Exhibition</h2>
-
-                <p>
-                    Display innovative projects and explain your
-                    ideas to visitors.
-                </p>
-
-                <p class="event-date">
-                    📅 5 October 2026
-                </p>
-
-                <p>
-                    📍 Seminar Hall
-                </p>
-
-                <button
-                    class="register-btn"
-                    onclick="registerEvent('Project Exhibition')"
-                    id="Project-Exhibition">
-                    Register
-                </button>
-
-            </div>
-
-
-            <!-- Quiz Competition -->
-            <div class="event-card">
-
-                <div class="event-icon">🧠</div>
-
-                <h2>Quiz Competition</h2>
-
-                <p>
-                    Participate in an exciting general knowledge
-                    and technical quiz.
-                </p>
-
-                <p class="event-date">
-                    📅 8 October 2026
-                </p>
-
-                <p>
-                    📍 Main Hall
-                </p>
-
-                <button
-                    class="register-btn"
-                    onclick="registerEvent('Quiz Competition')"
-                    id="Quiz-Competition">
-                    Register
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- Dashboard -->
-        <a href="dashboard.html" class="dashboard-button">
-            📊 Go to Dashboard
-        </a>
-
+<nav>
+    <h2>🎉 Event Management</h2>
+
+    <div>
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="dashboard.html">Dashboard</a>
+    </div>
+</nav>
+
+<div class="container">
+
+<h1>📅 Event List</h1>
+
+<div class="events">
+
+    <div class="card">
+        <h2>💻 Technical Workshop</h2>
+        <p>Learn technical skills and practical concepts.</p>
+        <p>📅 25 September 2026</p>
+        <p>📍 Computer Lab</p>
+
+        <button onclick="register('Technical Workshop')">
+            Register
+        </button>
     </div>
 
+    <div class="card">
+        <h2>🎭 Cultural Fest</h2>
+        <p>Music, dance and cultural activities.</p>
+        <p>📅 28 September 2026</p>
+        <p>📍 Auditorium</p>
 
-    <!-- JavaScript -->
-    <script>
+        <button onclick="register('Cultural Fest')">
+            Register
+        </button>
+    </div>
 
-        /*
-         * REGISTER EVENT
-         */
+    <div class="card">
+        <h2>🏆 Sports Day</h2>
+        <p>Different indoor and outdoor sports.</p>
+        <p>📅 30 September 2026</p>
+        <p>📍 College Ground</p>
 
-        function registerEvent(eventName) {
+        <button onclick="register('Sports Day')">
+            Register
+        </button>
+    </div>
 
-            let registrations =
-                JSON.parse(localStorage.getItem("registrations")) || [];
+    <div class="card">
+        <h2>👨‍💻 Coding Competition</h2>
+        <p>Test your programming skills.</p>
+        <p>📅 2 October 2026</p>
+        <p>📍 Computer Lab</p>
 
+        <button onclick="register('Coding Competition')">
+            Register
+        </button>
+    </div>
 
-            // Check whether already registered
+    <div class="card">
+        <h2>🚀 Project Exhibition</h2>
+        <p>Display your innovative projects.</p>
+        <p>📅 5 October 2026</p>
+        <p>📍 Seminar Hall</p>
 
-            let alreadyRegistered = registrations.some(
-                function(registration) {
-                    return registration.eventName === eventName;
-                }
-            );
+        <button onclick="register('Project Exhibition')">
+            Register
+        </button>
+    </div>
 
+    <div class="card">
+        <h2>🧠 Quiz Competition</h2>
+        <p>Participate in an exciting quiz.</p>
+        <p>📅 8 October 2026</p>
+        <p>📍 Main Hall</p>
 
-            if (alreadyRegistered) {
+        <button onclick="register('Quiz Competition')">
+            Register
+        </button>
+    </div>
 
-                alert(
-                    "You are already registered for " +
-                    eventName
-                );
+</div>
 
-                return;
-            }
+</div>
 
+<script>
 
-            // Create registration
+function register(eventName) {
 
-            let newRegistration = {
+    // Save selected event
+    localStorage.setItem("selectedEvent", eventName);
 
-                eventName: eventName,
+    // Open registration page
+    window.location.href = "register.html";
+}
 
-                date: new Date().toLocaleDateString()
-
-            };
-
-
-            // Add registration
-
-            registrations.push(newRegistration);
-
-
-            // Save registration
-
-            localStorage.setItem(
-                "registrations",
-                JSON.stringify(registrations)
-            );
-
-
-            // Change button
-
-            let buttonId =
-                eventName.replaceAll(" ", "-");
-
-            let button =
-                document.getElementById(buttonId);
-
-
-            if (button) {
-
-                button.textContent = "✓ Registered";
-
-                button.classList.add("registered");
-
-            }
-
-
-            alert(
-                "Successfully registered for " +
-                eventName + "!"
-            );
-
-        }
-
-
-        /*
-         * SHOW ALREADY REGISTERED EVENTS
-         * when the page is opened again.
-         */
-
-        function updateRegisteredButtons() {
-
-            let registrations =
-                JSON.parse(localStorage.getItem("registrations")) || [];
-
-
-            registrations.forEach(
-                function(registration) {
-
-                    let buttonId =
-                        registration.eventName.replaceAll(
-                            " ",
-                            "-"
-                        );
-
-
-                    let button =
-                        document.getElementById(buttonId);
-
-
-                    if (button) {
-
-                        button.textContent =
-                            "✓ Registered";
-
-                        button.classList.add(
-                            "registered"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        updateRegisteredButtons();
-
-    </script>
+</script>
 
 </body>
 </html>
