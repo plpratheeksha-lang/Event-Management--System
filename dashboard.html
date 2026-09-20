@@ -9,8 +9,6 @@
 
     <style>
 
-        /* ================= GENERAL ================= */
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -19,30 +17,26 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #f4f7fb;
+            background: #f5f7fb;
             color: #222;
-            line-height: 1.6;
         }
 
-
-        /* ================= NAVIGATION ================= */
+        /* Navigation */
 
         nav {
-            background: #0757a8;
-            color: white;
+            background: white;
             padding: 18px 7%;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
-
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
         nav h2 {
-            font-size: 24px;
+            color: #0757a8;
         }
 
         nav div {
@@ -51,69 +45,61 @@
         }
 
         nav a {
-            color: white;
             text-decoration: none;
+            color: #333;
             font-weight: bold;
         }
 
         nav a:hover {
-            color: #ffe082;
+            color: #0757a8;
         }
 
+        /* Header */
 
-        /* ================= DASHBOARD HEADER ================= */
-
-        .dashboard-header {
-            background: linear-gradient(135deg, #0757a8, #4facfe);
-            color: white;
+        .header {
+            background: white;
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
         }
 
-        .dashboard-header h1 {
-            font-size: 42px;
+        .header h1 {
+            color: #0757a8;
+            font-size: 40px;
             margin-bottom: 10px;
         }
 
-        .dashboard-header p {
+        .header p {
+            color: #666;
             font-size: 18px;
         }
 
-
-        /* ================= MAIN CONTAINER ================= */
+        /* Container */
 
         .container {
-            width: 85%;
+            width: 86%;
             max-width: 1200px;
             margin: 40px auto;
         }
 
-
-        /* ================= STATISTICS ================= */
+        /* Statistics */
 
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
+            margin-bottom: 40px;
         }
 
         .stat-card {
             background: white;
             padding: 25px;
-            border-radius: 15px;
+            border-radius: 12px;
             text-align: center;
-
             box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-
-            transition: 0.3s;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-icon {
-            font-size: 42px;
+        .stat-card .icon {
+            font-size: 35px;
         }
 
         .stat-card h2 {
@@ -124,19 +110,16 @@
 
         .stat-card p {
             color: #666;
-            font-weight: bold;
         }
 
-
-        /* ================= SECTION ================= */
+        /* Dashboard Sections */
 
         .section {
             background: white;
-            margin-top: 30px;
             padding: 30px;
-            border-radius: 15px;
-
-            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            border-radius: 14px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
         }
 
         .section h2 {
@@ -144,28 +127,20 @@
             margin-bottom: 20px;
         }
 
-
-        /* ================= EVENT ITEMS ================= */
-
-        .event-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        /* Event */
 
         .event {
-            background: #f4f7fb;
-            padding: 20px;
-
-            border-radius: 10px;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 18px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 15px;
         }
 
         .event h3 {
-            color: #0757a8;
+            color: #333;
             margin-bottom: 5px;
         }
 
@@ -174,92 +149,63 @@
         }
 
         .status {
-            background: #dff5e3;
-            color: #218838;
-
-            padding: 7px 14px;
-
-            border-radius: 20px;
-
-            font-size: 14px;
+            background: #eaf3ff;
+            color: #0757a8;
+            padding: 7px 12px;
+            border-radius: 15px;
+            font-size: 13px;
             font-weight: bold;
         }
 
-        .completed {
-            background: #e9ecef;
-            color: #555;
+        /* Buttons */
+
+        .buttons {
+            margin-top: 20px;
         }
 
-
-        /* ================= QUICK ACTIONS ================= */
-
-        .actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .button {
+        .btn {
             display: inline-block;
-
-            padding: 13px 22px;
-
+            padding: 12px 22px;
             background: #0757a8;
             color: white;
-
             text-decoration: none;
-
-            border-radius: 8px;
-
+            border-radius: 7px;
             font-weight: bold;
-
-            transition: 0.3s;
+            margin-right: 10px;
         }
 
-        .button:hover {
+        .btn:hover {
             background: #05447f;
         }
 
-        .button.secondary {
-            background: #4facfe;
+        .btn-light {
+            background: white;
+            color: #0757a8;
+            border: 2px solid #0757a8;
         }
 
-
-        /* ================= INFORMATION ================= */
-
-        .info-box {
-            background: #eaf3ff;
-            padding: 20px;
-            border-left: 5px solid #0757a8;
-            border-radius: 8px;
+        .btn-light:hover {
+            background: #0757a8;
+            color: white;
         }
 
-        .info-box p {
-            color: #555;
-        }
-
-
-        /* ================= FOOTER ================= */
+        /* Footer */
 
         footer {
-            margin-top: 50px;
-
             background: #073b73;
             color: white;
-
             text-align: center;
-
             padding: 25px;
+            margin-top: 50px;
         }
 
         footer p {
             margin: 5px;
         }
 
+        /* Mobile */
 
-        /* ================= MOBILE ================= */
-
-        @media (max-width: 850px) {
+        @media (max-width: 800px) {
 
             nav {
                 flex-direction: column;
@@ -283,21 +229,15 @@
             }
         }
 
-
         @media (max-width: 500px) {
 
             .stats {
                 grid-template-columns: 1fr;
             }
 
-            .dashboard-header h1 {
-                font-size: 32px;
-            }
-
             .container {
                 width: 92%;
             }
-
         }
 
     </style>
@@ -307,12 +247,11 @@
 
 <body>
 
-
-    <!-- ================= NAVIGATION ================= -->
+    <!-- Navigation -->
 
     <nav>
 
-        <h2>🎉 EventHub</h2>
+        <h2>EventHub</h2>
 
         <div>
 
@@ -329,45 +268,33 @@
     </nav>
 
 
-    <!-- ================= HEADER ================= -->
+    <!-- Header -->
 
-    <section class="dashboard-header">
+    <section class="header">
 
-        <h1>📊 Event Management Dashboard</h1>
+        <h1>Event Dashboard</h1>
 
         <p>
-            Manage, monitor and organize your events from one place.
+            Manage and monitor your events from one place.
         </p>
 
     </section>
 
 
-    <!-- ================= MAIN CONTENT ================= -->
+    <!-- Main -->
 
     <main class="container">
 
 
-        <!-- ================= STATISTICS ================= -->
+        <!-- Statistics -->
 
         <section class="stats">
 
-
             <div class="stat-card">
 
-                <div class="stat-icon">📅</div>
+                <div class="icon">📅</div>
 
-                <h2>12</h2>
-
-                <p>Total Events</p>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">🔮</div>
-
-                <h2>8</h2>
+                <h2>6</h2>
 
                 <p>Upcoming Events</p>
 
@@ -376,183 +303,111 @@
 
             <div class="stat-card">
 
-                <div class="stat-icon">✅</div>
+                <div class="icon">🎟️</div>
 
-                <h2>4</h2>
-
-                <p>Completed Events</p>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">👥</div>
-
-                <h2>156</h2>
+                <h2>120</h2>
 
                 <p>Total Registrations</p>
 
             </div>
 
 
-        </section>
+            <div class="stat-card">
+
+                <div class="icon">🏆</div>
+
+                <h2>3</h2>
+
+                <p>Past Events</p>
+
+            </div>
 
 
-        <!-- ================= UPCOMING EVENTS ================= -->
+            <div class="stat-card">
 
-        <section class="section">
+                <div class="icon">👥</div>
 
-            <h2>📅 Upcoming Events</h2>
+                <h2>85</h2>
 
-
-            <div class="event-list">
-
-
-                <div class="event">
-
-                    <div>
-
-                        <h3>💻 Technical Workshop</h3>
-
-                        <p>
-                            📅 20 October 2026
-                            &nbsp; | &nbsp;
-                            📍 Computer Lab
-                        </p>
-
-                    </div>
-
-                    <span class="status">
-                        Upcoming
-                    </span>
-
-                </div>
-
-
-                <div class="event">
-
-                    <div>
-
-                        <h3>🎭 Cultural Fest</h3>
-
-                        <p>
-                            📅 25 October 2026
-                            &nbsp; | &nbsp;
-                            📍 College Auditorium
-                        </p>
-
-                    </div>
-
-                    <span class="status">
-                        Upcoming
-                    </span>
-
-                </div>
-
-
-                <div class="event">
-
-                    <div>
-
-                        <h3>🏆 Coding Competition</h3>
-
-                        <p>
-                            📅 30 October 2026
-                            &nbsp; | &nbsp;
-                            📍 Computer Science Lab
-                        </p>
-
-                    </div>
-
-                    <span class="status">
-                        Upcoming
-                    </span>
-
-                </div>
-
+                <p>Participants</p>
 
             </div>
 
         </section>
 
 
-        <!-- ================= RECENT EVENTS ================= -->
+        <!-- Upcoming Events -->
 
         <section class="section">
 
-            <h2>🕘 Recent Events</h2>
+            <h2>Upcoming Events</h2>
 
 
-            <div class="event-list">
+            <div class="event">
 
+                <div>
 
-                <div class="event">
+                    <h3>Technical Workshop</h3>
 
-                    <div>
-
-                        <h3>🎓 Fresher's Orientation</h3>
-
-                        <p>
-                            📅 10 September 2026
-                            &nbsp; | &nbsp;
-                            📍 Seminar Hall
-                        </p>
-
-                    </div>
-
-                    <span class="status completed">
-                        Completed
-                    </span>
+                    <p>
+                        20 October 2026 | Computer Lab
+                    </p>
 
                 </div>
 
-
-                <div class="event">
-
-                    <div>
-
-                        <h3>🤖 Robotics Workshop</h3>
-
-                        <p>
-                            📅 5 September 2026
-                            &nbsp; | &nbsp;
-                            📍 Innovation Lab
-                        </p>
-
-                    </div>
-
-                    <span class="status completed">
-                        Completed
-                    </span>
-
-                </div>
-
+                <span class="status">
+                    Upcoming
+                </span>
 
             </div>
 
-        </section>
+
+            <div class="event">
+
+                <div>
+
+                    <h3>Cultural Fest</h3>
+
+                    <p>
+                        25 October 2026 | College Auditorium
+                    </p>
+
+                </div>
+
+                <span class="status">
+                    Upcoming
+                </span>
+
+            </div>
 
 
-        <!-- ================= QUICK ACTIONS ================= -->
+            <div class="event">
 
-        <section class="section">
+                <div>
 
-            <h2>⚡ Quick Actions</h2>
+                    <h3>Coding Competition</h3>
+
+                    <p>
+                        30 October 2026 | Computer Science Lab
+                    </p>
+
+                </div>
+
+                <span class="status">
+                    Upcoming
+                </span>
+
+            </div>
 
 
-            <div class="actions">
+            <div class="buttons">
 
-                <a class="button" href="events.html">
-                    📅 View Events
+                <a href="events.html" class="btn">
+                    View All Events
                 </a>
 
-                <a class="button" href="create-event.html">
-                    ➕ Create Event
-                </a>
-
-                <a class="button secondary" href="index.html">
-                    🏠 Back to Home
+                <a href="create-event.html" class="btn btn-light">
+                    Create Event
                 </a>
 
             </div>
@@ -560,27 +415,31 @@
         </section>
 
 
-        <!-- ================= INFORMATION ================= -->
+        <!-- Event Management -->
 
         <section class="section">
 
-            <h2>ℹ️ About the Dashboard</h2>
+            <h2>Event Management</h2>
+
+            <p>
+                Use the options below to manage your events
+                and registrations.
+            </p>
 
 
-            <div class="info-box">
+            <div class="buttons">
 
-                <p>
+                <a href="events.html" class="btn">
+                    Browse Events
+                </a>
 
-                    The Event Management Dashboard provides
-                    an overview of event activities.
+                <a href="create-event.html" class="btn">
+                    Create New Event
+                </a>
 
-                    It displays total events, upcoming events,
-                    completed events and registrations.
-
-                    Users can also view recent events and
-                    quickly access event management functions.
-
-                </p>
+                <a href="index.html" class="btn btn-light">
+                    Back to Home
+                </a>
 
             </div>
 
@@ -590,12 +449,12 @@
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- Footer -->
 
     <footer>
 
         <p>
-            <strong>🎉 Event Management System</strong>
+            <strong>Event Management System</strong>
         </p>
 
         <p>
