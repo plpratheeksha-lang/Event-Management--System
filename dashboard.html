@@ -1,33 +1,614 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Dashboard - EventHub</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Event Management System</title>
+
+    <style>
+
+        /* ================= GENERAL ================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+            line-height: 1.6;
+        }
+
+
+        /* ================= NAVIGATION ================= */
+
+        nav {
+            background: #0757a8;
+            color: white;
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav h2 {
+            font-size: 24px;
+        }
+
+        nav div {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffe082;
+        }
+
+
+        /* ================= DASHBOARD HEADER ================= */
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #0757a8, #4facfe);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-header p {
+            font-size: 18px;
+        }
+
+
+        /* ================= MAIN CONTAINER ================= */
+
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+
+        /* ================= STATISTICS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 42px;
+        }
+
+        .stat-card h2 {
+            color: #0757a8;
+            font-size: 32px;
+            margin: 8px 0;
+        }
+
+        .stat-card p {
+            color: #666;
+            font-weight: bold;
+        }
+
+
+        /* ================= SECTION ================= */
+
+        .section {
+            background: white;
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 15px;
+
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            color: #0757a8;
+            margin-bottom: 20px;
+        }
+
+
+        /* ================= EVENT ITEMS ================= */
+
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .event {
+            background: #f4f7fb;
+            padding: 20px;
+
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .event h3 {
+            color: #0757a8;
+            margin-bottom: 5px;
+        }
+
+        .event p {
+            color: #666;
+        }
+
+        .status {
+            background: #dff5e3;
+            color: #218838;
+
+            padding: 7px 14px;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .completed {
+            background: #e9ecef;
+            color: #555;
+        }
+
+
+        /* ================= QUICK ACTIONS ================= */
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .button {
+            display: inline-block;
+
+            padding: 13px 22px;
+
+            background: #0757a8;
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #05447f;
+        }
+
+        .button.secondary {
+            background: #4facfe;
+        }
+
+
+        /* ================= INFORMATION ================= */
+
+        .info-box {
+            background: #eaf3ff;
+            padding: 20px;
+            border-left: 5px solid #0757a8;
+            border-radius: 8px;
+        }
+
+        .info-box p {
+            color: #555;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 50px;
+
+            background: #073b73;
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 850px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav div {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .event {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-header h1 {
+                font-size: 32px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<nav>
-    <h2>EventHub</h2>
-</nav>
 
-<section class="hero">
-    <h1>Dashboard</h1>
-    <p>Event Management Overview</p>
-</section>
+    <!-- ================= NAVIGATION ================= -->
 
-<section style="text-align:center; padding:40px;">
+    <nav>
 
-    <h2>📅 Total Events</h2>
-    <p>3</p>
+        <h2>🎉 EventHub</h2>
 
-    <h2>🕒 Upcoming Events</h2>
-    <p>2</p>
+        <div>
 
-    <h2>👥 Registered Users</h2>
-    <p>15</p>
+            <a href="index.html">Home</a>
 
-</section>
+            <a href="events.html">Events</a>
+
+            <a href="create-event.html">Create Event</a>
+
+            <a href="dashboard.html">Dashboard</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <section class="dashboard-header">
+
+        <h1>📊 Event Management Dashboard</h1>
+
+        <p>
+            Manage, monitor and organize your events from one place.
+        </p>
+
+    </section>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="container">
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">📅</div>
+
+                <h2>12</h2>
+
+                <p>Total Events</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🔮</div>
+
+                <h2>8</h2>
+
+                <p>Upcoming Events</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">✅</div>
+
+                <h2>4</h2>
+
+                <p>Completed Events</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">👥</div>
+
+                <h2>156</h2>
+
+                <p>Total Registrations</p>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ================= UPCOMING EVENTS ================= -->
+
+        <section class="section">
+
+            <h2>📅 Upcoming Events</h2>
+
+
+            <div class="event-list">
+
+
+                <div class="event">
+
+                    <div>
+
+                        <h3>💻 Technical Workshop</h3>
+
+                        <p>
+                            📅 20 October 2026
+                            &nbsp; | &nbsp;
+                            📍 Computer Lab
+                        </p>
+
+                    </div>
+
+                    <span class="status">
+                        Upcoming
+                    </span>
+
+                </div>
+
+
+                <div class="event">
+
+                    <div>
+
+                        <h3>🎭 Cultural Fest</h3>
+
+                        <p>
+                            📅 25 October 2026
+                            &nbsp; | &nbsp;
+                            📍 College Auditorium
+                        </p>
+
+                    </div>
+
+                    <span class="status">
+                        Upcoming
+                    </span>
+
+                </div>
+
+
+                <div class="event">
+
+                    <div>
+
+                        <h3>🏆 Coding Competition</h3>
+
+                        <p>
+                            📅 30 October 2026
+                            &nbsp; | &nbsp;
+                            📍 Computer Science Lab
+                        </p>
+
+                    </div>
+
+                    <span class="status">
+                        Upcoming
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RECENT EVENTS ================= -->
+
+        <section class="section">
+
+            <h2>🕘 Recent Events</h2>
+
+
+            <div class="event-list">
+
+
+                <div class="event">
+
+                    <div>
+
+                        <h3>🎓 Fresher's Orientation</h3>
+
+                        <p>
+                            📅 10 September 2026
+                            &nbsp; | &nbsp;
+                            📍 Seminar Hall
+                        </p>
+
+                    </div>
+
+                    <span class="status completed">
+                        Completed
+                    </span>
+
+                </div>
+
+
+                <div class="event">
+
+                    <div>
+
+                        <h3>🤖 Robotics Workshop</h3>
+
+                        <p>
+                            📅 5 September 2026
+                            &nbsp; | &nbsp;
+                            📍 Innovation Lab
+                        </p>
+
+                    </div>
+
+                    <span class="status completed">
+                        Completed
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUICK ACTIONS ================= -->
+
+        <section class="section">
+
+            <h2>⚡ Quick Actions</h2>
+
+
+            <div class="actions">
+
+                <a class="button" href="events.html">
+                    📅 View Events
+                </a>
+
+                <a class="button" href="create-event.html">
+                    ➕ Create Event
+                </a>
+
+                <a class="button secondary" href="index.html">
+                    🏠 Back to Home
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= INFORMATION ================= -->
+
+        <section class="section">
+
+            <h2>ℹ️ About the Dashboard</h2>
+
+
+            <div class="info-box">
+
+                <p>
+
+                    The Event Management Dashboard provides
+                    an overview of event activities.
+
+                    It displays total events, upcoming events,
+                    completed events and registrations.
+
+                    Users can also view recent events and
+                    quickly access event management functions.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            <strong>🎉 Event Management System</strong>
+        </p>
+
+        <p>
+            EventHub | Plan • Manage • Celebrate
+        </p>
+
+        <p>
+            © 2026 EventHub. All Rights Reserved.
+        </p>
+
+    </footer>
+
 
 </body>
+
 </html>
